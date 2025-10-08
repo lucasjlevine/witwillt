@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getTopTracks } from "$lib/spotify.remote";
   import * as ToggleGroup from "$lib/components/ui/toggle-group";
+  import { cn } from "$lib/utils";
 
   let { hidden = false } = $props();
 
@@ -17,14 +18,33 @@
     <p>Loading...</p>
   {:then data}
     <ToggleGroup.Root variant="outline" type="single" bind:value={time_range}>
-      <ToggleGroup.Item value="short_term" class="cursor-pointer">
-        <span class="m-2">Short Term</span>
+      <ToggleGroup.Item
+        value="short_term"
+        class="cursor-pointer"
+        disabled={time_range === "short_term"}
+      >
+        <span class={cn("m-2", time_range === "short_term" ? "font-black" : "")}
+          >Short Term</span
+        >
       </ToggleGroup.Item>
-      <ToggleGroup.Item value="medium_term" class="cursor-pointer">
-        <span class="m-2">Medium Term</span>
+      <ToggleGroup.Item
+        value="medium_term"
+        class="cursor-pointer"
+        disabled={time_range === "medium_term"}
+      >
+        <span
+          class={cn("m-2", time_range === "medium_term" ? "font-black" : "")}
+          >Medium Term</span
+        >
       </ToggleGroup.Item>
-      <ToggleGroup.Item value="long_term" class="cursor-pointer">
-        <span class="m-2">Long Term</span>
+      <ToggleGroup.Item
+        value="long_term"
+        class="cursor-pointer"
+        disabled={time_range === "long_term"}
+      >
+        <span class={cn("m-2", time_range === "long_term" ? "font-black" : "")}
+          >Long Term</span
+        >
       </ToggleGroup.Item>
     </ToggleGroup.Root>
     {#if data?.items?.length}
