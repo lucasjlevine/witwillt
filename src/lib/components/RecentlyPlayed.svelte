@@ -1,16 +1,20 @@
 <script lang="ts">
   import { getRecentlyPlayed } from "$lib/spotify.remote";
 
+  let { hidden = false } = $props();
+
   const limit = 25;
 
   let recentlyPlayed = getRecentlyPlayed(limit);
 </script>
 
-<main>
+<main {hidden}>
   {#await recentlyPlayed}
     <p>Loading...</p>
   {:then data}
-    <h2 class="text-4xl font-bold mb-4 text-center">Recently Played</h2>
+    <h2 class="text-4xl font-bold mb-4 text-center max-sm:hidden">
+      Recently Played
+    </h2>
     {#if data?.items?.length}
       <div class="flex flex-col items-start space-y-4">
         {#each data.items as { track, played_at }}

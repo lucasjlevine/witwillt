@@ -2,6 +2,8 @@
   import { getTopArtists } from "$lib/spotify.remote";
   import * as ToggleGroup from "$lib/components/ui/toggle-group";
 
+  let { hidden = false } = $props();
+
   let time_range = $state<"short_term" | "medium_term" | "long_term">(
     "short_term"
   );
@@ -9,8 +11,8 @@
   let topArtists = $derived(getTopArtists({ time_range }));
 </script>
 
-<main class="flex flex-col items-center">
-  <h1 class="text-4xl font-bold mb-4">Top Artists</h1>
+<main class="flex flex-col items-center" {hidden}>
+  <h1 class="text-4xl font-bold mb-4 max-sm:hidden">Top Artists</h1>
   {#await topArtists}
     <p>Loading...</p>
   {:then data}

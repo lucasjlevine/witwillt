@@ -1,15 +1,16 @@
 <script lang="ts">
   import { getQueuedTracks } from "$lib/spotify.remote";
 
+  let { hidden = false } = $props();
+
   let queuedTracks = getQueuedTracks();
-  console.log(await queuedTracks);
 </script>
 
-<main>
+<main {hidden}>
   {#await queuedTracks}
     <p>Loading...</p>
   {:then data}
-    <h1 class="text-4xl font-bold text-center">Queued</h1>
+    <h1 class="text-4xl font-bold text-center max-sm:hidden">Queued</h1>
     {#if data?.queue?.length === 0}
       <p class="text-gray-600 m-4 text-center">No tracks in the queue.</p>
     {:else}
