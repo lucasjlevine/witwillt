@@ -43,7 +43,7 @@
 {#await currentlyPlaying}
   <p>Loading...</p>
 {:then data}
-  <h1 class="text-4xl font-bold">Currently Playing</h1>
+  <h1 class="text-4xl font-bold max-sm:text-3xl">Currently Playing</h1>
   {#if data?.item}
     <img
       src={data.item.album.images[0].url}
